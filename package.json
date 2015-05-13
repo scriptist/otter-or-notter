@@ -23,8 +23,9 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "cloudinary": "^1.2.1",
     "coffee-script": "^1.9.2",
-    "express": "~3.4.4",
+    "express": "^3.4.8",
     "node-sass": "^3.0.0"
   },
   "devDependencies": {},
