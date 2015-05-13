@@ -66,6 +66,6 @@ module.exports = class OtterOrNotter
 			image = @images[i]
 
 		if image.public_id not of @ratings
-			@ratings[image.public_id] = {otter: 0, notter: 0}
+			@ratings[image.public_id] = {otter: Math.floor(Math.random() * 3), notter: Math.floor(Math.random() * 3)}
 
 		{image: image, rating: @ratings[image.public_id]}
