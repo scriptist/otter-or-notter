@@ -1,4 +1,5 @@
 #!/bin/env node
+var coffee = require('coffee-script');
 var fs = require('fs');
 var sass = require('node-sass');
 var OtterOrNotter = require('./OtterOrNotter.js');
@@ -25,7 +26,12 @@ var OtterOrNotter = require('./OtterOrNotter.js');
 /* Render SCSS */
 sass.render({file: 'static/style.scss', outFile: 'static/style.css'}, function(err, result) {
 	fs.writeFile('static/style.css', result.css);
-})
+});
+
+/* Render CoffeeScript */
+fs.readFile('static/script.coffee', 'utf8', function(err, data) {
+	return fs.writeFile('static/script.js', coffee.compile(data));
+});
 
 /* Start Server */
 new OtterOrNotter();

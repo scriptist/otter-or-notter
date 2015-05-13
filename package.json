@@ -23,6 +23,7 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "coffee-script": "^1.9.2",
     "express": "~3.4.4",
     "node-sass": "^3.0.0"
   },
