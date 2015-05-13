@@ -1,5 +1,6 @@
 $color-otter: #cc3300;
 $color-notter: #006b9c;
+$container-width: 500px;
 
 html {
 	font-family: sans-serif;
@@ -10,9 +11,139 @@ html, body {
 	padding: 0;
 }
 
+/* Container */
+.container,  {
+	margin: 0 auto;
+	max-width: $container-width;
+	padding: 0 0.4em;
+}
+
 /* Help */
 .help {
 	background: $color-otter;
 	color: white;
 	font-size: 0.75em;
+	padding: 0.25em;
+
+	h2 {
+		font-size: 2em;
+		margin: 0.3em 0;
+		position: absolute;
+	}
+
+	ol {
+		margin: 0;
+		margin-left: 15em;
+		padding-left: 1.5em;
+	}
+
+	@media all and (max-width: $container-width) {
+		h2 {
+			text-align: center;
+			position: static;
+		}
+		ol {
+			margin-left: 0;
+		}
+	}
+}
+
+/* Header */
+.header {
+	h1 {
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 3.4em;
+		font-weight: 900;
+		letter-spacing: -0.01em;
+		margin: 0.3em 0 0.2em;
+		text-align: center;
+
+		.header__otter {
+			color: $color-otter;
+		}
+
+		.header__notter {
+			color: $color-notter;
+		}
+
+		@media all and (max-width: $container-width) {
+			font-size: 2em;
+		}
+	}
+}
+
+.image {
+	$gutter: 4px;
+
+	&::after {
+		clear: both;
+		content: '';
+		display: table;
+	}
+
+	img {
+		max-width: 100%;
+		vertical-align: middle;
+	}
+
+	.image__cta {
+		margin-top: $gutter;
+
+		.image__cta__otter, .image__cta__notter {
+			border: 0;
+			color: white;
+			cursor: pointer;
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 2em;
+			font-weight: 900;
+			padding: 0.2em 0;
+			width: 49.5%;
+			width: calc(50% - #{$gutter/2});
+
+			@media all and (max-width: $container-width) {
+				font-size: 1.4em;
+			}
+		}
+
+		.image__cta__otter {
+			background-color: $color-otter;
+			float: left;
+
+			&:hover {
+				background-color: darken($color-otter, 10);
+			}
+		}
+
+		.image__cta__notter {
+			background-color: $color-notter;
+			float: right;
+
+			&:hover {
+				background-color: darken($color-notter, 10);
+			}
+		}
+	}
+}
+
+.footer {
+	background-color: white;
+	border-top: 1px solid #ddd;
+	color: #888;
+	letter-spacing: 0.05em;
+	padding: 1em 0 0.4em;
+	text-align: center;
+
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	a {
+		color: inherit;
+
+		&:hover {
+			color: #333;
+		}
+	}
+
 }
