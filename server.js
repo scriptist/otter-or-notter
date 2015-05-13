@@ -28,4 +28,4 @@ sass.render({file: 'static/style.scss', outFile: 'static/style.css'}, function(e
 })
 
 /* Start Server */
-// new OtterOrNotter();
+new OtterOrNotter();
