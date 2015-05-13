@@ -1,8 +1,11 @@
 #!/bin/env node
+
+require('coffee-script/register');
+
 var coffee = require('coffee-script');
 var fs = require('fs');
 var sass = require('node-sass');
-var OtterOrNotter = require('./OtterOrNotter.js');
+var OtterOrNotter = require('./OtterOrNotter');
 
 
 /* Handle Termination */
