@@ -1,4 +1,6 @@
 #!/bin/env node
+var fs = require('fs');
+var sass = require('node-sass');
 var OtterOrNotter = require('./OtterOrNotter.js');
 
 
@@ -20,6 +22,10 @@ var OtterOrNotter = require('./OtterOrNotter.js');
 	});
 })();
 
+/* Render SCSS */
+sass.render({file: 'static/style.scss', outFile: 'static/style.css'}, function(err, result) {
+	fs.writeFile('static/style.css', result.css);
+})
 
 /* Start Server */
-new OtterOrNotter();
+// new OtterOrNotter();
