@@ -1,14 +1,21 @@
 $color-otter: #cc3300;
 $color-notter: #006b9c;
 $container-width: 500px;
-
-html {
-	font-family: sans-serif;
-}
+$gutter: 4px;
 
 html, body {
 	margin: 0;
 	padding: 0;
+}
+
+html {
+	font-family: sans-serif;
+	padding-bottom: 5em;
+}
+
+/* Utility */
+.is-hidden {
+	display: none;
 }
 
 /* Container */
@@ -73,7 +80,85 @@ html, body {
 }
 
 .image {
-	$gutter: 4px;
+	height: 0;
+	overflow: hidden;
+	padding-top: 75%;
+	position: relative;
+
+	.image__item, .image__overlay, .image__loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		width: 100%;
+	}
+
+	.image__item {
+		z-index: 1;
+
+		img {
+			max-width: 100%;
+			vertical-align: middle;
+		}
+	}
+
+	.image__overlay {
+		background: white;
+		transition: transform 0.3s;
+		z-index: 2;
+
+		&.image__overlay--hidden-start {
+			transform: translateY(100%);
+		}
+
+		&.image__overlay--hidden-end {
+			transform: translateY(-100%);
+		}
+	}
+
+	.image__loading {
+		background: url(/loading.svg) no-repeat center center;
+		background-color: white;
+		z-index: 3;
+	}
+}
+
+.column {
+	height: 0;
+	width: 49.5%;
+	width: calc(50% - #{$gutter/2});
+
+	position: absolute;
+	bottom: 0;
+
+	&:after {
+		color: white;
+		content: attr(data-percent) '%';
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 4em;
+		font-weight: 900;
+		text-align: center;
+		text-shadow: 0 0 5px rgba(black, 0.4);
+
+		position: absolute;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+
+	&.column--otter {
+		background: $color-otter;
+		left: 0;
+	}
+
+	&.column--notter {
+		background: $color-notter;
+		right: 0;
+	}
+}
+
+.cta {
+	margin-top: $gutter;
 
 	&::after {
 		clear: both;
@@ -81,46 +166,42 @@ html, body {
 		display: table;
 	}
 
-	img {
-		max-width: 100%;
-		vertical-align: middle;
+	.cta__otter, .cta__notter {
+		border: 0;
+		color: white;
+		cursor: pointer;
+		font-family: 'Source Sans Pro', sans-serif;
+		font-size: 2em;
+		font-weight: 900;
+		padding: 0.2em 0;
+		width: 49.5%;
+		width: calc(50% - #{$gutter/2});
+
+		@media all and (max-width: $container-width) {
+			font-size: 1.4em;
+		}
+
+		&[disabled], &[disabled]:hover {
+			background: #aaa;
+			cursor: default;
+		}
 	}
 
-	.image__cta {
-		margin-top: $gutter;
+	.cta__otter {
+		background-color: $color-otter;
+		float: left;
 
-		.image__cta__otter, .image__cta__notter {
-			border: 0;
-			color: white;
-			cursor: pointer;
-			font-family: 'Source Sans Pro', sans-serif;
-			font-size: 2em;
-			font-weight: 900;
-			padding: 0.2em 0;
-			width: 49.5%;
-			width: calc(50% - #{$gutter/2});
-
-			@media all and (max-width: $container-width) {
-				font-size: 1.4em;
-			}
+		&:hover {
+			background-color: darken($color-otter, 10);
 		}
+	}
 
-		.image__cta__otter {
-			background-color: $color-otter;
-			float: left;
+	.cta__notter {
+		background-color: $color-notter;
+		float: right;
 
-			&:hover {
-				background-color: darken($color-otter, 10);
-			}
-		}
-
-		.image__cta__notter {
-			background-color: $color-notter;
-			float: right;
-
-			&:hover {
-				background-color: darken($color-notter, 10);
-			}
+		&:hover {
+			background-color: darken($color-notter, 10);
 		}
 	}
 }
@@ -138,9 +219,14 @@ html, body {
 	right: 0;
 	bottom: 0;
 	left: 0;
+	z-index: 10;
 
 	small {
 		letter-spacing: 0;
+
+		@media all and (max-width: $container-width) {
+			display: none;
+		}
 	}
 
 	a {
@@ -150,5 +236,4 @@ html, body {
 			color: #333;
 		}
 	}
-
 }
