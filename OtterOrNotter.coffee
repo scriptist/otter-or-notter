@@ -78,6 +78,7 @@ module.exports = class OtterOrNotter
 		{image: image, rating: @ratings[id]}
 
 	saveData: ->
+		return
 		mongo.MongoClient.connect @mongodb.url, (err, db) =>
 			db.collection(@mongodb.collection).update(
 				# Condition
@@ -103,6 +104,7 @@ module.exports = class OtterOrNotter
 						console.log "#{Date(Date.now())}: Saved successfully"
 			)
 	loadData: (callback) ->
+		return (@ratings = {}) && callback()
 		mongo.MongoClient.connect @mongodb.url, (err, db) =>
 			db.collection(@mongodb.collection).find({name: @mongodb.name}).limit(1).toArray (err, docs) =>
 				if docs.length == 0

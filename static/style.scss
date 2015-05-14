@@ -241,3 +241,17 @@ html {
 		}
 	}
 }
+
+.github {
+	position: absolute;
+	top: 0;
+	right: 0;
+
+	@media all and (max-width: 750px) {
+		display: none;
+	}
+
+	img {
+		border: none;
+	}
+}
