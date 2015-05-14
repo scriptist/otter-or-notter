@@ -50,13 +50,15 @@ module.exports = class OtterOrNotter
 
 		@app.post '/api/rate', (req, res) =>
 			data   = req.body
-			id     = data.id
+			id     = @processId data.id
 			rating = data.rating
 
 			if (id of @ratings) && (rating == 'otter') || (rating == 'notter')
 				@ratings[id][rating]++
 				console.log "#{Date(Date.now())}: Rated #{id} #{rating}"
 				@saveData()
+			else
+				console.log "#{Date(Date.now())}: Unable to rate #{id} #{rating}"
 
 			res.send @randomImage()
 
@@ -68,10 +70,12 @@ module.exports = class OtterOrNotter
 			i = Math.floor(Math.random() * @images.length)
 			image = @images[i]
 
-		if image.public_id not of @ratings
-			@ratings[image.public_id] = {otter: Math.floor(Math.random() * 3), notter: Math.floor(Math.random() * 3)}
+		id = @processId image.public_id
 
-		{image: image, rating: @ratings[image.public_id]}
+		if id not of @ratings
+			@ratings[id] = {otter: Math.floor(Math.random() * 3), notter: Math.floor(Math.random() * 3)}
+
+		{image: image, rating: @ratings[id]}
 
 	saveData: ->
 		mongo.MongoClient.connect @mongodb.url, (err, db) =>
@@ -107,3 +111,6 @@ module.exports = class OtterOrNotter
 					@ratings = docs[0].ratings
 
 				typeof callback == 'function' && callback()
+
+	processId: (id) ->
+		id.replace(/[\.\$]/g, '-')
