@@ -102,8 +102,8 @@ module.exports = class OtterOrNotter
 		mongo.MongoClient.connect @mongodb.url, (err, db) =>
 			db.collection(@mongodb.collection).find({name: @mongodb.name}).limit(1).toArray (err, docs) =>
 				if docs.length == 0
-					return @ratings = {}
-
-				@ratings = docs[0].ratings
+					@ratings = {}
+				else
+					@ratings = docs[0].ratings
 
 				typeof callback == 'function' && callback()
