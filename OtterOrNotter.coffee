@@ -74,7 +74,7 @@ module.exports = class OtterOrNotter
 		{image: image, rating: @ratings[image.public_id]}
 
 	saveData: ->
-		mongo.MongoClient.connect @mongodb.url, (err, db) ->
+		mongo.MongoClient.connect @mongodb.url, (err, db) =>
 			db.collection(@mongodb.collection).update(
 				# Condition
 				{
